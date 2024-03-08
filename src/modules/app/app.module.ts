@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { dataSourceOptions } from 'src/core/database/data-source';
+import { AuthModule } from 'src/core/auth/auth.module';
 @Module({
   imports: [  
   ConfigModule.forRoot({
@@ -15,6 +16,7 @@ import { dataSourceOptions } from 'src/core/database/data-source';
       rootPath: join(__dirname, '..', '..', '..', 'public'),
     }),
     TypeOrmModule.forRoot({ autoLoadEntities: true, ...dataSourceOptions }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],

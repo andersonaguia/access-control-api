@@ -20,11 +20,6 @@ import { CreateUserDto } from "src/modules/system_users/dto/create-user.dto";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  test(){
-    return "teste bem sucedido";
-  }
-
   @Post("/signup")
   async signUp(@Body(ValidationPipe) createUserDto: CreateUserDto) {
     try {

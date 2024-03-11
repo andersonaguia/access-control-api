@@ -183,6 +183,148 @@ Body: {
 }
 ```
 
+#### 🔒 Cadastrar uma porta
+
+##### Para cadastrar uma nova porta você deve realizar uma requisição do tipo `POST` com os dados do `Body` conforme indicado abaixo. No cabeçalho da requisição você deverá enviar o `TOKEN` recebido no momento da realização do login. Para o campo `state` os seguintes valores serão aceitos: 
+
+```
+OPEN = 0,
+MAINTENANCE = 1,
+CLEANING = 2,
+CLOSED = 3,
+```
+
+```
+POST: http://localhost:3001/doors/new
+Headers: {
+	"Content-Type": "application/json",
+	"Authorization": "Bearer SEU_TOKEN_AQUI"
+}
+
+Body: {  
+	"name": "Entrada Principal", 
+	"readerModel": "HID MIFARE", 
+	"isOpen": false,
+    "state" : 0
+}
+```
+**Resultado:**
+```
+{
+	"status": 201,
+	"headers": {},
+	"body": {
+		"statusCode": 201,
+		"message": "Usuário cadastrado com sucesso!"	
+	}
+}
+```
+
+
+#### Abrir ou fechar uma porta
+
+##### Para abrir ou fechar uma porta você deve realizar uma requisição do tipo `PATCH` com os dados do `Body` conforme indicado abaixo. Na chave `isOpen` envie `true` para abrir ou `false` para fechar.
+
+```
+POST: http://localhost:3001/doors/access
+Headers: {
+	"Content-Type": "application/json"
+}
+
+Body: {  
+	"doorId": 1,
+    "isOpen": true,
+    "cardNumber": "123456"
+}
+```
+**Resultado:**
+```
+{
+	"statusCode": 200,
+    "message": "Dados atualizados com sucesso"
+}
+```
+
+#### 🔒 Mudar o estado de uma porta
+
+##### Para mudar o estado de uma porta você deve realizar uma requisição do tipo `PATCH` com os dados do `Body` conforme indicado abaixo. No cabeçalho da requisição você deverá enviar o `TOKEN` recebido no momento da realização do login. Para o campo `state` os seguintes valores serão aceitos: 
+
+```
+OPEN = 0,
+MAINTENANCE = 1,
+CLEANING = 2,
+CLOSED = 3,
+```
+
+```
+POST: http://localhost:3001/doors/changestate
+Headers: {
+	"Content-Type": "application/json",
+	"Authorization": "Bearer SEU_TOKEN_AQUI"
+}
+
+Body: {  
+	"doorId": 1,
+    "state": 2
+}
+```
+**Resultado:**
+```
+{
+	"statusCode": 200,
+    "message": "Dados atualizados com sucesso"
+}
+```
+
+#### Buscar todas as portas disponíveis
+
+##### Para buscar todas as portas cadastradas você deve realizar uma requisição do tipo `GET`conforme indicado abaixo.
+
+```
+GET: http://localhost:3001/doors/findall
+Headers: {
+	"Content-Type": "application/json"
+}
+```
+**Resultado:**
+```
+[
+    {
+        "id": 1,
+        "createdAt": "2024-03-09T01:44:07.082Z",
+        "updatedAt": "2024-03-11T17:10:24.169Z",
+        "deletedAt": null,
+        "name": "ACADEMIA",
+        "readerModel": "HID MIFARE",
+        "isOpen": true,
+        "state": 0,
+        "registeredBy": 3
+    },
+    {
+        "id": 7,
+        "createdAt": "2024-03-09T10:45:08.017Z",
+        "updatedAt": "2024-03-11T17:05:18.437Z",
+        "deletedAt": null,
+        "name": "LAVANDERIA",
+        "readerModel": "HID MIFARE",
+        "isOpen": true,
+        "state": 0,
+        "registeredBy": 3
+    },
+    {
+        "id": 9,
+        "createdAt": "2024-03-11T20:32:33.224Z",
+        "updatedAt": "2024-03-11T20:32:33.234Z",
+        "deletedAt": null,
+        "name": "ENTRADA SOCIAL",
+        "readerModel": "HID MIFARE",
+        "isOpen": false,
+        "state": 0,
+        "registeredBy": 3
+    }
+]
+```
+
 #### 🔒 lorem ipsum
 
 ##### lorem ipsum:

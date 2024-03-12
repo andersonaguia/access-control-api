@@ -7,6 +7,7 @@ import { join } from 'path';
 import { dataSourceOptions } from 'src/core/database/data-source';
 import { AuthModule } from 'src/core/auth/auth.module';
 import { DoorsModule } from '../doors/doors.module';
+import { SourcesModule } from '../sources/sources.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +20,7 @@ import { DoorsModule } from '../doors/doors.module';
     TypeOrmModule.forRoot({ autoLoadEntities: true, ...dataSourceOptions }),
     AuthModule,
     DoorsModule,
+    SourcesModule,
   ],
   controllers: [],
   providers: [],

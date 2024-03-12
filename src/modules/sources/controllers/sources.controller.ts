@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpException,
   Post,
   Request,
@@ -26,6 +27,16 @@ export class SourcesController {
       if (result.id) {
         return { code: 201, message: 'Fonte cadastrada com sucesso' };
       }
+    } catch (error) {
+      throw new HttpException({ error }, error.code);
+    }
+  }
+
+  @Get('/findall')
+  async findAll() {
+    try {
+      const result = await this.sourcesService.findAll();
+      return { code: 200, sources: result };
     } catch (error) {
       throw new HttpException({ error }, error.code);
     }

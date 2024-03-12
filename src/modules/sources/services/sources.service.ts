@@ -10,14 +10,25 @@ export class SourcesService {
   add(sourceData: CreateSourceDto, req: any): Promise<SourcesEntity> {
     return new Promise(async (resolve, reject) => {
       try {
-        const {id} = req.user;
+        const { id } = req.user;
         const newSource = new SourcesEntity();
         newSource.name = sourceData.sourceName.toUpperCase();
         newSource.registeredBy = id;
         newSource.createdAt = new Date();
-        
+
         const sourceSaved = await this.sourcesRepository.add(newSource);
         resolve(sourceSaved);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  findAll(): Promise<SourcesEntity[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const sourcesFound = await this.sourcesRepository.findAll();
+        resolve(sourcesFound);
       } catch (error) {
         reject(error);
       }

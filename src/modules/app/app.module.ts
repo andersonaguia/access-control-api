@@ -8,6 +8,7 @@ import { dataSourceOptions } from 'src/core/database/data-source';
 import { AuthModule } from 'src/core/auth/auth.module';
 import { DoorsModule } from '../doors/doors.module';
 import { SourcesModule } from '../sources/sources.module';
+import { PeoplesModule } from '../peoples/peoples.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,6 +22,7 @@ import { SourcesModule } from '../sources/sources.module';
     AuthModule,
     DoorsModule,
     SourcesModule,
+    PeoplesModule,
   ],
   controllers: [],
   providers: [],

@@ -1,0 +1,21 @@
+version: '1.0.0'
+services:
+  nestjs:
+    environment:
+      - PORT=
+      - SOCKET_PORT=
+      - DB_DIALECT=
+      - DB_HOST=
+      - DB_PORT=
+      - DB_USER=
+      - DB_PASS=
+      - DB_NAME=
+      - JWT_SECRET=
+    image: access-control-api:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    ports: 
+      - 3005:3005
+      - 8005:8005

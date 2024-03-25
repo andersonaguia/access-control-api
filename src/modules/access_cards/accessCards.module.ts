@@ -7,6 +7,6 @@ import { AccessCardsService } from './services/accessCards.service';
   imports: [],
   controllers: [AccessCardsController],
   providers: [AccessCardsService, AccessCardsRepository],
-  exports: [],
+  exports: [AccessCardsService],
 })
 export class AccessCardsModule {}

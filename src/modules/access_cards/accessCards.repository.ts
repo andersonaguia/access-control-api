@@ -97,4 +97,42 @@ export class AccessCardsRepository extends Repository<AccessCardsEntity> {
       }
     });
   }
+
+  findByNumber(cardNumber: string): Promise<AccessCardsEntity> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const accessCardFound = await this.findOne({
+          where: { cardNumber: cardNumber, deletedAt: IsNull() },
+          loadRelationIds: true,
+        });
+        if (accessCardFound.id) {
+          resolve(accessCardFound);
+        }
+      } catch (error) {
+        if (error instanceof QueryFailedError) {
+          const mysqlError: MySqlDriverError = error.driverError;
+          reject({
+            statusCode: HttpStatus.BAD_REQUEST,
+            message: mysqlError.sqlMessage,
+          });
+        } else if (error.message) {
+          error.message.includes(
+            `Cannot read properties of null (reading 'id')`,
+          )
+            ? reject({
+                statusCode: HttpStatus.NOT_FOUND,
+                message: `Nenhum registro encontrado para o cartão ${cardNumber}`,
+              })
+            : reject({
+                statusCode: HttpStatus.BAD_REQUEST,
+                message: error,
+              });
+        }
+        reject({
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: error,
+        });
+      }
+    });
+  }
 }

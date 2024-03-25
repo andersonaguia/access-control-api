@@ -10,6 +10,8 @@ import { DoorsModule } from '../doors/doors.module';
 import { SourcesModule } from '../sources/sources.module';
 import { PeoplesModule } from '../peoples/peoples.module';
 import { AccessCardsModule } from '../access_cards/accessCards.module';
+import { DoorHistoryModule } from '../door_history/doorHistory.module';
+import { EventsModule } from '../events/events.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,10 +23,12 @@ import { AccessCardsModule } from '../access_cards/accessCards.module';
     }),
     TypeOrmModule.forRoot({ autoLoadEntities: true, ...dataSourceOptions }),
     AuthModule,
+    EventsModule,
     DoorsModule,
     SourcesModule,
     PeoplesModule,
     AccessCardsModule,
+    DoorHistoryModule,
   ],
   controllers: [],
   providers: [],

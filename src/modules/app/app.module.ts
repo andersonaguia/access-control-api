@@ -9,6 +9,7 @@ import { AuthModule } from 'src/core/auth/auth.module';
 import { DoorsModule } from '../doors/doors.module';
 import { SourcesModule } from '../sources/sources.module';
 import { PeoplesModule } from '../peoples/peoples.module';
+import { AccessCardsModule } from '../access_cards/accessCards.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,6 +24,7 @@ import { PeoplesModule } from '../peoples/peoples.module';
     DoorsModule,
     SourcesModule,
     PeoplesModule,
+    AccessCardsModule,
   ],
   controllers: [],
   providers: [],

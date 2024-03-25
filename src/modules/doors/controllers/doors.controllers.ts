@@ -72,16 +72,10 @@ export class DoorsController {
   @Patch('/access')
   async access(@Body() accessData: AccessDoorDto) {
     try {
-      const result = await this.doorsService.access(accessData);     
+      const result = await this.doorsService.access(accessData);
       return result;
     } catch (error) {
-      throw new HttpException(
-        {
-          statusCode: error.code,
-          message: error,
-        },
-        error.code,
-      );
+      throw new HttpException(error, error.statusCode);
     }
   }
 
@@ -90,7 +84,7 @@ export class DoorsController {
   @Patch('/changestate')
   async changeState(@Body() stateData: StateDoorDto) {
     try {
-      const result = await this.doorsService.changeState(stateData);     
+      const result = await this.doorsService.changeState(stateData);
       return result;
     } catch (error) {
       throw new HttpException(

@@ -53,4 +53,15 @@ export class AccessCardsService {
       }
     });
   }
+
+  findByNumber(cardNumber: string): Promise<AccessCardsEntity> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const accessCardFound = await this.accessCardsRepository.findByNumber(cardNumber);
+        resolve(accessCardFound);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 }
